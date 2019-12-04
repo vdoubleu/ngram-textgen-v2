@@ -26,6 +26,10 @@ public class WordTrie {
 		this.words.add(new WordTrie(s, 1));
 	}
 	
+	public void addExistingChild(WordTrie t){
+		this.words.add(t);
+	}
+	
 	// returns boolean for whether a specific child node exists.
 	public boolean isChild(String s){
 		boolean isChildBool = false;
@@ -52,6 +56,7 @@ public class WordTrie {
 	public WordTrie getChild(int index){return words.get(index);}
 	
 	// returns boolean for whether a sequence of strings occur in the trie
+	// checks children nodes and grand children nodes and great grand children nodes and etc.
 	public static boolean itExists(WordTrie t, ArrayList<String> s){
 		if(s.isEmpty())
 			return true;
@@ -64,7 +69,47 @@ public class WordTrie {
 			return false;
 		else{
 			s.remove(0);
-			return itExists(t.getChild(t.childPos(first)), s);
+			return itExists(t.getChild(strPosInChild), s);
+		}
+	}	
+	
+	// similar to itExists but instead outputs freq, outputs -1 if it doesn't exist
+	public static int seqFreq(WordTrie t, ArrayList<String> s){
+		if(s.isEmpty())
+			return t.getFreq();
+		
+		String first = s.get(0);
+		
+		int strPosInChild = t.childPos(first);
+		
+		if(strPosInChild == -1)
+			return -1;
+		else{
+			s.remove(0);
+			return seqFreq(t.getChild(t.childPos(first)), s);
+		}
+	}
+	
+	private static boolean containsString(ArrayList<WordTrie> t, String s){
+		for(int i = 0; i < t.size(); i++){
+			if(t.get(i).getKey() == s)
+				return true;
+		}
+		
+		return false;
+	}
+	
+	public static void addSeq(WordTrie t, ArrayList<String> s){
+		if(!(s.isEmpty())){
+			String first = s.get(0);
+		
+			if(containsString(t.words, first)){
+				s.remove(0);
+				addSeq(t.getChild(t.childPos(first)), s);
+			} else {
+				t.addChild(first);
+				addSeq(t, s);
+			}
 		}
 	}
 	
