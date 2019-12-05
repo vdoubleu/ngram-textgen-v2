@@ -18,12 +18,23 @@ public class WordTrie {
 	public String getKey(){return this.key;}
 	public int getFreq(){return this.freq;}
 	public String getChildKey(int listPos){return this.words.get(listPos).getKey();}
+	public ArrayList<WordTrie> getWordTries(){return this.words;}
+	
+	public ArrayList<String> getWords(){
+		ArrayList<String> strLst = new ArrayList<String>();
+		
+		for(int i = 0; i < words.size(); i++){
+			strLst.add(this.getChildKey(i));
+		}
+		
+		return strLst;
+	}
 	
 	public void setKey(String s){this.key = s;}
 	public void setFreq(int i){this.freq = i;}
 	
-	public void addChild(String s){
-		this.words.add(new WordTrie(s, 1));
+	public void addChild(String s, int freq){
+		this.words.add(new WordTrie(s, freq));
 	}
 	
 	public void addExistingChild(WordTrie t){
@@ -107,10 +118,14 @@ public class WordTrie {
 				s.remove(0);
 				addSeq(t.getChild(t.childPos(first)), s);
 			} else {
-				t.addChild(first);
+				t.addChild(first, 0);
 				addSeq(t, s);
 			}
+		} else {
+			t.setKey(1 + t.getKey());
 		}
 	}
+	
+
 	
 }
