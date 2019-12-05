@@ -141,7 +141,7 @@ public class WordTrie {
 				addSeqHelp(t, s);
 			}
 		} else {
-			t.setKey(1 + t.getKey());
+			t.setFreq(1 + t.getFreq());
 		}
 	}
 	
