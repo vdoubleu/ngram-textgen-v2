@@ -34,6 +34,12 @@ public class textPredictor {
 		
 		
 		System.out.println(dic.getFreq(lst));
+		
+		
+		Scanner scan = new Scanner(System.in);
+		
+		System.out.println(scan.next());
+		System.out.println(scan.next());
 	}
 
 }
