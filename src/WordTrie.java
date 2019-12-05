@@ -68,7 +68,14 @@ public class WordTrie {
 	
 	// returns boolean for whether a sequence of strings occur in the trie
 	// checks children nodes and grand children nodes and great grand children nodes and etc.
+	
 	public static boolean itExists(WordTrie t, ArrayList<String> s){
+		ArrayList<String> copyS = new ArrayList<String>();
+		copyS.addAll(s);
+		return itExistsHelp(t, copyS);
+	}
+	
+	private static boolean itExistsHelp(WordTrie t, ArrayList<String> s){
 		if(s.isEmpty())
 			return true;
 		
@@ -80,12 +87,18 @@ public class WordTrie {
 			return false;
 		else{
 			s.remove(0);
-			return itExists(t.getChild(strPosInChild), s);
+			return itExistsHelp(t.getChild(strPosInChild), s);
 		}
 	}	
 	
 	// similar to itExists but instead outputs freq, outputs -1 if it doesn't exist
 	public static int seqFreq(WordTrie t, ArrayList<String> s){
+		ArrayList<String> copyS = new ArrayList<String>();
+		copyS.addAll(s);
+		return seqFreqHelp(t, copyS);
+	}
+	
+	private static int seqFreqHelp(WordTrie t, ArrayList<String> s){
 		if(s.isEmpty())
 			return t.getFreq();
 		
@@ -97,7 +110,7 @@ public class WordTrie {
 			return -1;
 		else{
 			s.remove(0);
-			return seqFreq(t.getChild(t.childPos(first)), s);
+			return seqFreqHelp(t.getChild(t.childPos(first)), s);
 		}
 	}
 	
@@ -111,15 +124,21 @@ public class WordTrie {
 	}
 	
 	public static void addSeq(WordTrie t, ArrayList<String> s){
+		ArrayList<String> copyS = new ArrayList<String>();
+		copyS.addAll(s);
+		addSeqHelp(t, copyS);
+	}
+	
+	private static void addSeqHelp(WordTrie t, ArrayList<String> s){
 		if(!(s.isEmpty())){
 			String first = s.get(0);
 		
 			if(containsString(t.words, first)){
 				s.remove(0);
-				addSeq(t.getChild(t.childPos(first)), s);
+				addSeqHelp(t.getChild(t.childPos(first)), s);
 			} else {
 				t.addChild(first, 0);
-				addSeq(t, s);
+				addSeqHelp(t, s);
 			}
 		} else {
 			t.setKey(1 + t.getKey());

@@ -4,19 +4,25 @@ public class Dictionary {
 	HashMap<String, WordTrie> dictionary = new HashMap<String, WordTrie>();
 	
 	public void updateDic(ArrayList<String> s){
-		String first = s.get(0);
+		ArrayList<String> copyS = new ArrayList<String>();
+		copyS.addAll(s);
+		String first = copyS.get(0);
 		WordTrie t;
 		
-		if(dictionary.containsKey(first))
+		if(dictionary.containsKey(first)){
 			t = dictionary.get(first);
-		else 
+			copyS.remove(0);
+			WordTrie.addSeq(t, copyS);
+			dictionary.replace(first, t);
+		}
+		else {
 			t = new WordTrie(first, 1);
-		
-		
-		s.remove(0);
-		WordTrie.addSeq(t, s);
+			copyS.remove(0);
+			WordTrie.addSeq(t, copyS);
+			dictionary.put(first, t);
+		}
 
-		dictionary.replace(first, t);
+
 	}
 	
 	public int getFreq(ArrayList<String> s){
