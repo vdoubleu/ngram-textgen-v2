@@ -26,19 +26,19 @@ public class Dictionary {
 	}
 	
 	public int getFreq(ArrayList<String> s){
-		int freq = 1;
+		int freq = -1;
 		String first = s.get(0);
 		s.remove(0);
 		
-		while(freq != -1){
+		while(freq == -1){
 			if (s.size() == 0){
 				System.out.println("no word found");
 				return -1;
 				}
 			
-			if(dictionary.containsKey(first))
+			if(dictionary.containsKey(first)){
 				freq = WordTrie.seqFreq(dictionary.get(first), s);
-			else {
+			} else {
 				System.out.println("word not found, reducing level to:" + s.size());
 				first = s.get(0);
 				s.remove(0);

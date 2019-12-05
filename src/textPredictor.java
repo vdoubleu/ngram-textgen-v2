@@ -29,6 +29,8 @@ public class textPredictor {
 		
 		System.out.println(WordTrie.seqFreq(t, lst));*/
 		dic.updateDic(lst);
+		dic.updateDic(lst);
+		dic.updateDic(lst);
 		
 		
 		System.out.println(dic.getFreq(lst));
