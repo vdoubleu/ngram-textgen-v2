@@ -8,8 +8,8 @@ public class textPredictor {
 		
 		Dictionary dic = new Dictionary();
 		
-	/*	WordTrie t = new WordTrie();
-		
+		WordTrie t = new WordTrie();
+		/*
 		ArrayList<String> lst = new ArrayList<String>();
 		lst.add("1st");
 		lst.add("2nd");
@@ -24,11 +24,13 @@ public class textPredictor {
 		lst.add("3rd");
 		lst.add("4th");
 		
+		WordTrie.addSeq(t, lst);
 		
-		dic.updateDic(lst);
+		System.out.println(WordTrie.seqFreq(t, lst));
+		//dic.updateDic(lst);
 		
 		
-		System.out.println(dic.getFreq(lst));
+		//System.out.println(dic.getFreq(lst));
 	}
 
 }
