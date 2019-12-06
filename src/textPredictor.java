@@ -46,6 +46,7 @@ public class textPredictor {
 			System.out.println(wordHist.get(i));
 		}
 		
+		
 	}
 
 }
