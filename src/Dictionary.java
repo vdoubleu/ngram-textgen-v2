@@ -21,8 +21,6 @@ public class Dictionary {
 			WordTrie.addSeq(t, copyS);
 			dictionary.put(first, t);
 		}
-
-
 	}
 	
 	public int getFreq(ArrayList<String> s){
@@ -47,5 +45,6 @@ public class Dictionary {
 		
 		return freq;
 	}
+	
 	
 }

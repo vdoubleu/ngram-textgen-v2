@@ -23,13 +23,36 @@ public class textPredictor {
 		//fill dictionary with words
 		for(int i = 2; i < depth + 1; i++){
 			while(token.hasNextToken()){
+				//System.out.println(Arrays.toString(token.getWords().toArray()));
 				dic.updateDic(token.getWords());
 				token.getNextToken();
 			}
 			token.resetUpdateTokenizer(i);
 		}
+		/*
+		ArrayList<String> test = new ArrayList<String>();
+		test.add("testing");
+		test.add("testing");
+		//test.add("hi");
+		
+		dic.updateDic(test);
+		
+		ArrayList<String> test1 = new ArrayList<String>();
+		test1.add("testing");
+		test1.add("testing");
+		test1.add("hi");
+		
+		dic.updateDic(test1);
+		
+		System.out.println("test");
+		System.out.println(dic.getFreq(test));
+		System.out.println("test");
+		
+		*/
 		
 		
+		
+		/*
 		// outputting
 		ArrayList<String> wordHist;
 		String inputStr;
@@ -46,7 +69,7 @@ public class textPredictor {
 			System.out.println(wordHist.get(i));
 		}
 		
-		
+		*/
 		
 	}
 

@@ -46,7 +46,7 @@ public class WordTrie {
 		boolean isChildBool = false;
 		
 		for(int i = 0; i < words.size(); i++){
-			if(getChildKey(i) == s) 
+			if(getChildKey(i).equals(s)) 
 				isChildBool = true;
 		}
 		
@@ -57,7 +57,7 @@ public class WordTrie {
 	// returns position of a specific child node. If it doesn't exist, it returns -1
 	public int childPos(String s){
 		for(int i = 0; i < words.size(); i++){
-			if(getChildKey(i) == s) 
+			if(getChildKey(i).equals(s)) 
 				return i;
 		}
 		
@@ -116,8 +116,9 @@ public class WordTrie {
 	
 	private static boolean containsString(ArrayList<WordTrie> t, String s){
 		for(int i = 0; i < t.size(); i++){
-			if(t.get(i).getKey() == s)
+			if(t.get(i).getKey().equals(s)){
 				return true;
+			}
 		}
 		
 		return false;
@@ -144,7 +145,40 @@ public class WordTrie {
 			t.setFreq(1 + t.getFreq());
 		}
 	}
+
+	public ArrayList<Integer> getChildFreqs(ArrayList<String> s){
+		ArrayList<String> copyS = new ArrayList<String>();
+		copyS.addAll(s);
+		
+		return getWordsFreqHelp(this, copyS);
+	}
 	
+	private static ArrayList<Integer> getWordsFreqHelp(WordTrie t, ArrayList<String> s){
+		if(s.size() == 1){
+			//what happens when you get there
+			ArrayList<Integer> freqs = new ArrayList<Integer>(); 
+			
+			for(int i = 0; i < t.words.size(); i++){
+				freqs.add(t.words.get(i).freq);
+			}
+			
+			return freqs;
+		}
+		
+		String first = s.get(0);
+		
+		int strPosInChild = t.childPos(first);
+		
+		if(strPosInChild == -1){
+			System.out.println("error, not found");
+			return null; //not found
+		}else{
+			s.remove(0);
+			return getWordsFreqHelp(t.getChild(t.childPos(first)), s);
+		}
+	}
+
+
 
 	
 }

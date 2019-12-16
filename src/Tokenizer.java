@@ -40,8 +40,9 @@ public class Tokenizer {
 	public void resetUpdateTokenizer(int depth){
 		this.n = depth + 1;
 		
+		this.words.clear();
 		try {
-			scan = new Scanner(dataFile);
+			this.scan = new Scanner(dataFile);
 		
 			for(int i = 0; i < n; i++)
 				this.words.add(scan.next());
