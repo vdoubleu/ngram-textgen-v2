@@ -24,26 +24,48 @@ public class Dictionary {
 	}
 	
 	public int getFreq(ArrayList<String> s){
-		int freq = -1;
+		int freq = 0;
 		String first = s.get(0);
 		s.remove(0);
 		
-		while(freq == -1){
+		//while(freq == 0){
 			if (s.size() == 0){
-				System.out.println("no word found");
-				return -1;
-				}
+				System.out.println("input length zero, no word found");
+				return 0;
+			}
 			
 			if(dictionary.containsKey(first)){
 				freq = WordTrie.seqFreq(dictionary.get(first), s);
 			} else {
-				System.out.println("word not found, reducing level to:" + s.size());
-				first = s.get(0);
-				s.remove(0);
+				System.out.println("first word not found in dic");
+				//System.out.println("word not found, reducing level to:" + s.size());
+				//first = s.get(0);
+				//s.remove(0);
 			}
-		}
+		//}
 		
 		return freq;
+	}
+	
+	public ArrayList<Integer> getAllNextFreq(ArrayList<String> s){
+		ArrayList<Integer> nextFreqs = new ArrayList<Integer>();
+		String first = s.get(0);
+		s.remove(0);
+		
+		if(s.size() == 0){
+			System.out.println("input length zero, no word found");
+			return nextFreqs;
+		}
+		
+		if(dictionary.containsKey(first))
+			WordTrie.seqChildFreq(dictionary.get(first), s, nextFreqs);
+		else
+			System.out.println("first word not found in dic");
+			
+		
+		return nextFreqs;
+		
+		
 	}
 	
 	

@@ -68,8 +68,8 @@ public class textPredictor {
 		for(int i = 0; i < wordHist.size(); i++){
 			System.out.println(wordHist.get(i));
 		}
-		
 		*/
+		
 		
 	}
 
