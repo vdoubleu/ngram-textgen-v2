@@ -146,20 +146,21 @@ public class WordTrie {
 		}
 	}
 
-	public ArrayList<Integer> getChildFreqs(ArrayList<String> s){
+	public ArrayList<Pair<Integer, String>> seqChildFreqs(ArrayList<String> s){
 		ArrayList<String> copyS = new ArrayList<String>();
 		copyS.addAll(s);
 		
-		return getWordsFreqHelp(this, copyS);
+		return seqChildFreqHelp(this, copyS);
 	}
 	
-	private static ArrayList<Integer> getWordsFreqHelp(WordTrie t, ArrayList<String> s){
+	private static ArrayList<Pair<Integer, String>> seqChildFreqHelp(WordTrie t, ArrayList<String> s){
 		if(s.size() == 1){
-			//what happens when you get there
-			ArrayList<Integer> freqs = new ArrayList<Integer>(); 
+			//what happens when you get there		
+			ArrayList<Pair<Integer, String>> freqs = new ArrayList<Pair<Integer, String>>();
+			
 			
 			for(int i = 0; i < t.words.size(); i++){
-				freqs.add(t.words.get(i).freq);
+				freqs.add(new Pair<Integer, String>(t.words.get(i).freq, t.words.get(i).key));
 			}
 			
 			return freqs;
@@ -174,11 +175,8 @@ public class WordTrie {
 			return null; //not found
 		}else{
 			s.remove(0);
-			return getWordsFreqHelp(t.getChild(t.childPos(first)), s);
+			return seqChildFreqHelp(t.getChild(t.childPos(first)), s);
 		}
 	}
-
-
-
 	
 }

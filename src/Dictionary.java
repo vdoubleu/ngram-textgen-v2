@@ -47,25 +47,17 @@ public class Dictionary {
 		return freq;
 	}
 	
-	public ArrayList<Integer> getAllNextFreq(ArrayList<String> s){
-		ArrayList<Integer> nextFreqs = new ArrayList<Integer>();
+	public ArrayList<Pair<Integer, String>> getAllNextFreq(ArrayList<String> s){
+		ArrayList<Pair<Integer, String>> nextFreqs = new ArrayList<Pair<Integer, String>>();
 		String first = s.get(0);
-		s.remove(0);
-		
-		if(s.size() == 0){
-			System.out.println("input length zero, no word found");
-			return nextFreqs;
-		}
 		
 		if(dictionary.containsKey(first))
-			WordTrie.seqChildFreq(dictionary.get(first), s, nextFreqs);
+			nextFreqs = dictionary.get(first).seqChildFreqs(s);
 		else
 			System.out.println("first word not found in dic");
 			
 		
 		return nextFreqs;
-		
-		
 	}
 	
 	

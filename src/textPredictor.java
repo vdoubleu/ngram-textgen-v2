@@ -29,26 +29,27 @@ public class textPredictor {
 			}
 			token.resetUpdateTokenizer(i);
 		}
-		/*
+		
 		ArrayList<String> test = new ArrayList<String>();
 		test.add("testing");
 		test.add("testing");
 		//test.add("hi");
 		
-		dic.updateDic(test);
+		//dic.updateDic(test);
 		
 		ArrayList<String> test1 = new ArrayList<String>();
 		test1.add("testing");
-		test1.add("testing");
-		test1.add("hi");
+		//test1.add("testing");
+		//test1.add("testing");
+		//test1.add("hi");
 		
-		dic.updateDic(test1);
+		//dic.updateDic(test1);
 		
-		System.out.println("test");
+		System.out.println("---");
 		System.out.println(dic.getFreq(test));
-		System.out.println("test");
+		System.out.println("---");
+		System.out.println(dic.getAllNextFreq(test).toString());
 		
-		*/
 		
 		
 		
@@ -69,8 +70,15 @@ public class textPredictor {
 			System.out.println(wordHist.get(i));
 		}
 		*/
+	}
+	
+	public static ArrayList<Pair<Double, String>> calcProbs(ArrayList<Pair<Integer, String>> p, int mainFreq){
+		ArrayList<Pair<Double, String>> outProb = new ArrayList<Pair<Double, String>>();
 		
+		for(int i = 0; i < p.size(); i++)
+			outProb.add(new Pair<Double, String>((double)(p.get(i).getFirst()/mainFreq), p.get(i).getSec()));
 		
+		return outProb;
 	}
 
 }
