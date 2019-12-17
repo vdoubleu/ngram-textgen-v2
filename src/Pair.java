@@ -14,4 +14,8 @@ public class Pair<A, B> {
 	public B getSec(){
 		return this.sec;
 	}
+	
+	public String toString(){
+		return getFirst() + " " + getSec();
+	}
 }

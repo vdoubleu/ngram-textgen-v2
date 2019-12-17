@@ -22,14 +22,17 @@ public class textPredictor {
 		
 		//fill dictionary with words
 		for(int i = 2; i < depth + 1; i++){
-			while(token.hasNextToken()){
-				//System.out.println(Arrays.toString(token.getWords().toArray()));
+			while(true){
+				System.out.println(Arrays.toString(token.getWords().toArray()));
 				dic.updateDic(token.getWords());
-				token.getNextToken();
+				
+				if(token.hasNextToken())
+					token.getNextToken();
+				else break;
 			}
 			token.resetUpdateTokenizer(i);
 		}
-		
+		/*
 		ArrayList<String> test = new ArrayList<String>();
 		test.add("testing");
 		test.add("testing");
@@ -49,11 +52,9 @@ public class textPredictor {
 		System.out.println(dic.getFreq(test));
 		System.out.println("---");
 		System.out.println(dic.getAllNextFreq(test).toString());
+		*/
 		
 		
-		
-		
-		/*
 		// outputting
 		ArrayList<String> wordHist;
 		String inputStr;
@@ -66,10 +67,30 @@ public class textPredictor {
 		while(wordHist.size() > depth)
 			wordHist.remove(0);
 		
+		/*
 		for(int i = 0; i < wordHist.size(); i++){
 			System.out.println(wordHist.get(i));
+		}*/
+		
+		
+		
+	}
+	/*
+	public static String nextWord(ArrayList<String> w, Dictionary d){
+		int currentSeqFreq = d.getFreq(w);
+		
+		
+	}*/
+	
+	public static Pair<Double, String> highestProb(ArrayList<Pair<Double, String>> lst){
+		Pair<Double, String> largest = lst.get(0);
+		
+		for(int i = 1; i < lst.size(); i++){
+			if(lst.get(i).getFirst() > largest.getFirst())
+				largest = lst.get(i);
 		}
-		*/
+		
+		return largest;
 	}
 	
 	public static ArrayList<Pair<Double, String>> calcProbs(ArrayList<Pair<Integer, String>> p, int mainFreq){
