@@ -4,8 +4,6 @@ import java.util.*;
 public class textPredictor {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		
 		String path = "./src/inputData.txt";
 
 		Dictionary dic = new Dictionary();
@@ -35,7 +33,7 @@ public class textPredictor {
 		/*
 		ArrayList<String> test = new ArrayList<String>();
 		test.add("testing");
-		test.add("testing");
+		//test.add("testing");
 		//test.add("hi");
 		
 		//dic.updateDic(test);
@@ -48,12 +46,19 @@ public class textPredictor {
 		
 		//dic.updateDic(test1);
 		
-		System.out.println("---");
-		System.out.println(dic.getFreq(test));
-		System.out.println("---");
+		//System.out.println("---");
+		//System.out.println(dic.getFreq(test));
+		//System.out.println("---");
+
 		System.out.println(dic.getAllNextFreq(test).toString());
-		*/
 		
+		System.out.println(dic.getFreq(test1));		
+		
+		System.out.println(dic.sumNextFreq(test));
+		
+		System.out.println("---");
+		//System.out.println(calcProbs(dic.getAllNextFreq(test), dic.getFreq(test)));
+		*/
 		
 		// outputting
 		ArrayList<String> wordHist;
@@ -67,20 +72,35 @@ public class textPredictor {
 		while(wordHist.size() > depth)
 			wordHist.remove(0);
 		
-		/*
-		for(int i = 0; i < wordHist.size(); i++){
-			System.out.println(wordHist.get(i));
-		}*/
+		
+		for(int i = 0; i < 20; i++){
+			String nxtWord = nextWord(wordHist, dic, depth);
+			System.out.print(nxtWord + " ");
+			
+			wordHist.remove(0);
+			wordHist.add(nxtWord);
+		}
 		
 		
 		
 	}
-	/*
-	public static String nextWord(ArrayList<String> w, Dictionary d){
-		int currentSeqFreq = d.getFreq(w);
+	
+	public static String nextWord(ArrayList<String> inSeq, Dictionary d, int depth){
+		ArrayList<String> inSeqCopy = copyLst(inSeq);
 		
+		Pair<Double, String> largestProb = highestProb(calcProbs(d.getAllNextFreq(inSeqCopy), d.sumNextFreq(inSeq)));
 		
-	}*/
+		for(int i = 1; i < depth - 1; i++){
+			inSeq.remove(0);
+			
+			Pair<Double, String> curr = highestProb(calcProbs(d.getAllNextFreq(inSeq), d.sumNextFreq(inSeq)));
+			
+			if(curr.getFirst() > largestProb.getFirst())
+				largestProb = curr;
+		}
+		
+		return largestProb.getSec();
+	}
 	
 	public static Pair<Double, String> highestProb(ArrayList<Pair<Double, String>> lst){
 		Pair<Double, String> largest = lst.get(0);
@@ -100,6 +120,13 @@ public class textPredictor {
 			outProb.add(new Pair<Double, String>((double)(p.get(i).getFirst()/mainFreq), p.get(i).getSec()));
 		
 		return outProb;
+	}
+	
+	public static ArrayList<String> copyLst(ArrayList<String> lst){
+		ArrayList<String> copy = new ArrayList<String>();
+		copy.addAll(lst);
+		
+		return copy;
 	}
 
 }

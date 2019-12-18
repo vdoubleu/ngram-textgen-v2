@@ -149,6 +149,7 @@ public class WordTrie {
 	public ArrayList<Pair<Integer, String>> seqChildFreqs(ArrayList<String> s){
 		ArrayList<String> copyS = new ArrayList<String>();
 		copyS.addAll(s);
+		copyS.remove(0);
 		
 		return seqChildFreqHelp(this, copyS);
 	}
@@ -158,7 +159,6 @@ public class WordTrie {
 			//what happens when you get there		
 			ArrayList<Pair<Integer, String>> freqs = new ArrayList<Pair<Integer, String>>();
 			
-			
 			for(int i = 0; i < t.words.size(); i++){
 				freqs.add(new Pair<Integer, String>(t.words.get(i).freq, t.words.get(i).key));
 			}
@@ -166,16 +166,14 @@ public class WordTrie {
 			return freqs;
 		}
 		
-		String first = s.get(0);
-		
-		int strPosInChild = t.childPos(first);
+		int strPosInChild = t.childPos(s.get(0));
+		s.remove(0);
 		
 		if(strPosInChild == -1){
 			System.out.println("error, not found");
 			return null; //not found
 		}else{
-			s.remove(0);
-			return seqChildFreqHelp(t.getChild(t.childPos(first)), s);
+			return seqChildFreqHelp(t.getChild(strPosInChild), s);
 		}
 	}
 	
