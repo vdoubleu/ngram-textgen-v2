@@ -30,49 +30,27 @@ public class textPredictor {
 			}
 			token.resetUpdateTokenizer(i);
 		}
-		/*
-		ArrayList<String> test = new ArrayList<String>();
-		test.add("A");
-		//test.add("hi");
-		
-		//dic.updateDic(test);
-		
-		//ArrayList<String> test1 = new ArrayList<String>();
-		//test1.add("testing");
-		//test1.add("testing");
-		//test1.add("testing");
-		//test1.add("hi");
-		
-		//dic.updateDic(test1);
-		
-		//System.out.println("---");
-		//System.out.println(dic.getFreq(test));
-		//System.out.println("---");
-
-		System.out.println(dic.getAllNextFreq(test).toString());
-		
-		//System.out.println(dic.getFreq(test));		
-		
-		System.out.println(dic.sumNextFreq(test));
-		
-		System.out.println("---");
-		//System.out.println(calcProbs(dic.getAllNextFreq(test), dic.getFreq(test)));
-		*/
 		
 		// outputting
 		ArrayList<String> wordHist;
 		String inputStr;
+		int outLength = 10;
 		
 		System.out.println("input starting prompt, the word count must be greater than or equal to " + (depth - 1));
 		inputStr = scan.nextLine();
 		
+		System.out.println("how many words do you wish to ouput?");
+		outLength = scan.nextInt();
+		
+		//prepping input
 		wordHist = new ArrayList<String>(Arrays.asList(inputStr.split(" ")));
 		
 		while(wordHist.size() >= depth)
 			wordHist.remove(0);
 		
 		
-		for(int i = 0; i < 30; i++){
+		System.out.print(inputStr + " -||- ");
+		for(int i = 0; i < outLength; i++){
 			ArrayList<String> wordHistCopy = copyLst(wordHist);
 			
 			String nxtWord = nextWord(wordHistCopy, dic, depth);
@@ -81,8 +59,6 @@ public class textPredictor {
 			wordHist.remove(0);
 			wordHist.add(nxtWord);
 		}
-		
-		
 		
 	}
 	
