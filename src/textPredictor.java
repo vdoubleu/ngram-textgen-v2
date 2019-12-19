@@ -32,14 +32,13 @@ public class textPredictor {
 		}
 		/*
 		ArrayList<String> test = new ArrayList<String>();
-		test.add("testing");
-		//test.add("testing");
+		test.add("A");
 		//test.add("hi");
 		
 		//dic.updateDic(test);
 		
-		ArrayList<String> test1 = new ArrayList<String>();
-		test1.add("testing");
+		//ArrayList<String> test1 = new ArrayList<String>();
+		//test1.add("testing");
 		//test1.add("testing");
 		//test1.add("testing");
 		//test1.add("hi");
@@ -52,7 +51,7 @@ public class textPredictor {
 
 		System.out.println(dic.getAllNextFreq(test).toString());
 		
-		System.out.println(dic.getFreq(test1));		
+		//System.out.println(dic.getFreq(test));		
 		
 		System.out.println(dic.sumNextFreq(test));
 		
@@ -64,17 +63,19 @@ public class textPredictor {
 		ArrayList<String> wordHist;
 		String inputStr;
 		
-		System.out.println("input starting prompt, the word count must be greater than or equal to " + depth);
+		System.out.println("input starting prompt, the word count must be greater than or equal to " + (depth - 1));
 		inputStr = scan.nextLine();
 		
 		wordHist = new ArrayList<String>(Arrays.asList(inputStr.split(" ")));
 		
-		while(wordHist.size() > depth)
+		while(wordHist.size() >= depth)
 			wordHist.remove(0);
 		
 		
-		for(int i = 0; i < 20; i++){
-			String nxtWord = nextWord(wordHist, dic, depth);
+		for(int i = 0; i < 30; i++){
+			ArrayList<String> wordHistCopy = copyLst(wordHist);
+			
+			String nxtWord = nextWord(wordHistCopy, dic, depth);
 			System.out.print(nxtWord + " ");
 			
 			wordHist.remove(0);
@@ -87,7 +88,6 @@ public class textPredictor {
 	
 	public static String nextWord(ArrayList<String> inSeq, Dictionary d, int depth){
 		ArrayList<String> inSeqCopy = copyLst(inSeq);
-		
 		Pair<Double, String> largestProb = highestProb(calcProbs(d.getAllNextFreq(inSeqCopy), d.sumNextFreq(inSeq)));
 		
 		for(int i = 1; i < depth - 1; i++){

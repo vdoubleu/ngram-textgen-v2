@@ -149,7 +149,6 @@ public class WordTrie {
 	public ArrayList<Pair<Integer, String>> seqChildFreqs(ArrayList<String> s){
 		ArrayList<String> copyS = new ArrayList<String>();
 		copyS.addAll(s);
-		copyS.remove(0);
 		
 		return seqChildFreqHelp(this, copyS);
 	}
@@ -166,11 +165,11 @@ public class WordTrie {
 			return freqs;
 		}
 		
-		int strPosInChild = t.childPos(s.get(0));
 		s.remove(0);
+		int strPosInChild = t.childPos(s.get(0));
 		
 		if(strPosInChild == -1){
-			System.out.println("error, not found");
+			System.out.println("error, not found (trie)");
 			return null; //not found
 		}else{
 			return seqChildFreqHelp(t.getChild(strPosInChild), s);

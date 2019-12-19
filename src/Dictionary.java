@@ -23,6 +23,7 @@ public class Dictionary {
 		}
 	}
 	
+	//don't need, useless
 	public int getFreq(ArrayList<String> s){
 		ArrayList<String> copyS = new ArrayList<String>();
 		copyS.addAll(s);
@@ -33,7 +34,7 @@ public class Dictionary {
 		
 		//while(freq == 0){
 		if (copyS.size() == 0 && first == null){
-			System.out.println("input length zero, no word found");
+			System.out.println("input length zero, no word found (dictionary)");
 			return 0;
 		}
 		
@@ -61,7 +62,12 @@ public class Dictionary {
 			nextFreqs = dictionary.get(first).seqChildFreqs(copyS);
 		else
 			System.out.println("first word not found in dic");
-		
+		/*
+		for(int i = 0; i < nextFreqs.size(); i++){
+			System.out.print(nextFreqs.get(i).getFirst() + "=" + nextFreqs.get(i).getSec() + " ");
+		}
+		System.out.println();
+		*/
 		return nextFreqs;
 	}
 	
