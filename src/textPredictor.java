@@ -81,7 +81,7 @@ public class textPredictor {
 	public static Pair<Double, String> highestProb(ArrayList<Pair<Double, String>> lst){
 		Pair<Double, String> largest = lst.get(0);
 		
-		for(int i = 1; i < lst.size(); i++){
+		for(int i = 1; i < lst.size(); i++){			
 			if(lst.get(i).getFirst() > largest.getFirst())
 				largest = lst.get(i);
 		}
@@ -92,9 +92,10 @@ public class textPredictor {
 	public static ArrayList<Pair<Double, String>> calcProbs(ArrayList<Pair<Integer, String>> p, int mainFreq){
 		ArrayList<Pair<Double, String>> outProb = new ArrayList<Pair<Double, String>>();
 		
-		for(int i = 0; i < p.size(); i++)
-			outProb.add(new Pair<Double, String>((double)(p.get(i).getFirst()/mainFreq), p.get(i).getSec()));
-		
+		for(int i = 0; i < p.size(); i++){
+			outProb.add(new Pair<Double, String>((double)(p.get(i).getFirst())/mainFreq, p.get(i).getSec()));
+		}
+			
 		return outProb;
 	}
 	
