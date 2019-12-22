@@ -32,8 +32,8 @@ public class Dictionary {
 		
 		if(dictionary.containsKey(first))
 			nextFreqs = dictionary.get(first).seqChildFreqs(copyS);
-		else
-			System.out.println("first word not found in dic");
+		//else
+		//	System.out.println("first word not found in dic");
 
 		return nextFreqs;
 	}

@@ -23,9 +23,8 @@ public class WordTrie {
 	public ArrayList<String> getWords(){
 		ArrayList<String> strLst = new ArrayList<String>();
 		
-		for(int i = 0; i < words.size(); i++){
+		for(int i = 0; i < words.size(); i++)
 			strLst.add(this.getChildKey(i));
-		}
 		
 		return strLst;
 	}
@@ -80,7 +79,6 @@ public class WordTrie {
 			return true;
 		
 		String first = s.get(0);
-		
 		int strPosInChild = t.childPos(first);
 		
 		if(strPosInChild == -1)
@@ -116,9 +114,8 @@ public class WordTrie {
 	
 	private static boolean containsString(ArrayList<WordTrie> t, String s){
 		for(int i = 0; i < t.size(); i++){
-			if(t.get(i).getKey().equals(s)){
+			if(t.get(i).getKey().equals(s))
 				return true;
-			}
 		}
 		
 		return false;
@@ -141,9 +138,8 @@ public class WordTrie {
 				t.addChild(first, 0);
 				addSeqHelp(t, s);
 			}
-		} else {
+		} else 
 			t.setFreq(1 + t.getFreq());
-		}
 	}
 
 	public ArrayList<Pair<Integer, String>> seqChildFreqs(ArrayList<String> s){
@@ -158,9 +154,8 @@ public class WordTrie {
 			//what happens when you get there		
 			ArrayList<Pair<Integer, String>> freqs = new ArrayList<Pair<Integer, String>>();
 			
-			for(int i = 0; i < t.words.size(); i++){
+			for(int i = 0; i < t.words.size(); i++)
 				freqs.add(new Pair<Integer, String>(t.words.get(i).freq, t.words.get(i).key));
-			}
 			
 			return freqs;
 		}
@@ -171,9 +166,8 @@ public class WordTrie {
 		if(strPosInChild == -1){
 			System.out.println("error, not found (trie)");
 			return null; //not found
-		}else{
+		} else
 			return seqChildFreqHelp(t.getChild(strPosInChild), s);
-		}
 	}
 	
 }
